@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice } from '@reduxjs/toolkit';
 
-import * as contactsAPI from '../../services';
+import { contactsAPI } from '../../api';
 
 const handlePending = state => {
   state.contacts.isLoading = true;

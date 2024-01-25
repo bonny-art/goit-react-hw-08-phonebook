@@ -1,17 +1,17 @@
-import { CONTACTS_ENDPOINT, BASE_URL } from '../constants';
+import { mockapi } from '../constants';
 import axios from 'axios';
 
-axios.defaults.baseURL = BASE_URL;
+axios.defaults.baseURL = mockapi.BASE_URL;
 
 export const getContacts = async () => {
-  const { data } = await axios.get(CONTACTS_ENDPOINT);
+  const { data } = await axios.get(mockapi.CONTACTS_ENDPOINT);
 
   return data;
 };
 
 export const postContact = async contact => {
   const { data } = await axios.post(
-    CONTACTS_ENDPOINT,
+    mockapi.CONTACTS_ENDPOINT,
     JSON.stringify(contact),
     {
       headers: {
@@ -24,7 +24,7 @@ export const postContact = async contact => {
 };
 
 export const deleteContact = async id => {
-  const { data } = await axios.delete(`${CONTACTS_ENDPOINT}/${id}`);
+  const { data } = await axios.delete(`${mockapi.CONTACTS_ENDPOINT}/${id}`);
 
   return data;
 };
