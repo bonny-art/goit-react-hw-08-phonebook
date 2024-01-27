@@ -1,16 +1,18 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { PhoneInputForm, Filter, Contacts } from 'components';
-import { Section, Header, Title } from './Section/Section.styled';
+import { Layout } from 'components';
+import { ContactsPage, HomePage, LoginPage, RegisterPage } from 'pages';
 
 export const App = () => {
   return (
-    <Section>
-      <Header>Phonebook</Header>
-      <PhoneInputForm />
-      <Title>Contacts</Title>
-      <Filter />
-      <Contacts />
-    </Section>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+      </Route>
+    </Routes>
   );
 };

@@ -65,13 +65,14 @@ const contactsSlice = createSlice({
     ),
   }),
   selectors: {
-    getContacts: contactsHandlers.handleContacts,
-    getIsLoading: contactsHandlers.handleIsLoading,
-    getError: contactsHandlers.handleError,
+    selectContacts: contactsHandlers.handleContacts,
+    selectIsLoading: contactsHandlers.handleIsLoading,
+    selectError: contactsHandlers.handleError,
   },
 });
 
 export const contactsReducer = contactsSlice.reducer;
 export const { fetchContactsAction, addContactAction, deleteContactAction } =
   contactsSlice.actions;
-export const { getContacts, getIsLoading, getError } = contactsSlice.selectors;
+export const { selectContacts, selectIsLoading, selectError } =
+  contactsSlice.selectors;

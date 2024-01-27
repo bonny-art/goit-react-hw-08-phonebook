@@ -8,10 +8,10 @@ const createSlice = buildCreateSlice({
 });
 
 const initialState = {
-  isAuthenticated: false,
+  isLoggedIn: false,
   user: null,
   token: '',
-  errorMessage: '',
+  error: '',
   isLoading: false,
 };
 
@@ -22,9 +22,11 @@ const authSlice = createSlice({
     signUpUserAction: creator.asyncThunk(
       async (body, { rejectWithValue }) => {
         try {
-          return await authAPI.signUpUser(body);
+          const data = await authAPI.signUpUser(body);
+          authAPI.token.set(data.token);
+          return data;
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          return rejectWithValue(error.response.data.message);
         }
       },
       {
@@ -37,9 +39,11 @@ const authSlice = createSlice({
     logInUserAction: creator.asyncThunk(
       async (body, { rejectWithValue }) => {
         try {
-          return await authAPI.logInUser(body);
+          const data = await authAPI.logInUser(body);
+          authAPI.token.set(data.token);
+          return data;
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          return rejectWithValue(error.response.data.message);
         }
       },
       {
@@ -48,8 +52,31 @@ const authSlice = createSlice({
         rejected: authHandlers.handleRejected,
       }
     ),
+
+    logOutUserAction: creator.asyncThunk(
+      async (_, { rejectWithValue }) => {
+        try {
+          const data = await authAPI.logOutUser();
+          authAPI.token.unset();
+          return data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      },
+      {
+        pending: authHandlers.handlePending,
+        fulfilled: authHandlers.handlelogOutUser,
+        rejected: authHandlers.handleRejected,
+      }
+    ),
   }),
+  selectors: {
+    selectIsLoggedIn: authHandlers.handleIsLoggedIn,
+    selectUserName: authHandlers.handleUserName,
+  },
 });
 
 export const authReducer = authSlice.reducer;
-export const { signUpUserAction, logInUserAction } = authSlice.actions;
+export const { signUpUserAction, logInUserAction, logOutUserAction } =
+  authSlice.actions;
+export const { selectIsLoggedIn, selectUserName } = authSlice.selectors;

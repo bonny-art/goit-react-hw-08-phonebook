@@ -3,6 +3,15 @@ import axios from 'axios';
 
 axios.defaults.baseURL = connections.BASE_URL;
 
+export const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    delete axios.defaults.headers.common.Authorization;
+  },
+};
+
 export const signUpUser = async body => {
   const { data } = await axios.post(connections.USER_SIGNUP_ENDPOINT, body);
 

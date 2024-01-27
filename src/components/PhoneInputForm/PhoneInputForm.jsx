@@ -5,7 +5,7 @@ import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { Notify } from 'notiflix';
 
-import { addContactAction, getContacts } from 'store';
+import { addContactAction, selectContacts } from 'store';
 
 import {
   InputFormContainer,
@@ -37,7 +37,7 @@ const schema = yup.object().shape({
 });
 
 export const PhoneInputForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
 
