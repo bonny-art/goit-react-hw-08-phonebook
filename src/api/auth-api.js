@@ -22,7 +22,7 @@ export const logOutUser = async body => {
 };
 
 export const currentUser = async body => {
-  const { data } = await axios.post(connections.USER_CURRENT_ENDPOINT, body);
+  const { data } = await axios.get(connections.USER_CURRENT_ENDPOINT, body);
 
   return data;
 };

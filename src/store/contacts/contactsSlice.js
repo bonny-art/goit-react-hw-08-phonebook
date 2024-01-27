@@ -1,20 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice } from '@reduxjs/toolkit';
-
 import { contactsAPI } from '../../api';
-
-const handlePending = state => {
-  state.contacts.isLoading = true;
-  state.contacts.error = '';
-};
-
-const handleRejected = (state, { payload }) => {
-  state.contacts.isLoading = false;
-  state.contacts.error = payload;
-};
-
-const handleContacts = state => state.contacts.items;
-const handleIsLoading = state => state.contacts.isLoading;
-const handleError = state => state.contacts.error;
+import * as contactsHandlers from './contactsHandlers';
 
 const initialState = {
   contacts: {
@@ -37,16 +23,14 @@ const contactsSlice = createSlice({
         try {
           return await contactsAPI.getContacts();
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          console.log('🚀 ~ error:', error);
+          return rejectWithValue(error.response.data.message);
         }
       },
       {
-        pending: handlePending,
-        fulfilled: (state, { payload }) => {
-          state.contacts.isLoading = false;
-          state.contacts.items = payload;
-        },
-        rejected: handleRejected,
+        pending: contactsHandlers.handlePending,
+        fulfilled: contactsHandlers.handleFetchContacts,
+        rejected: contactsHandlers.handleRejected,
       }
     ),
 
@@ -55,16 +39,13 @@ const contactsSlice = createSlice({
         try {
           return await contactsAPI.postContact(contact);
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          return rejectWithValue(error.response.data.message);
         }
       },
       {
-        pending: handlePending,
-        fulfilled: (state, { payload }) => {
-          state.contacts.isLoading = false;
-          state.contacts.items.push(payload);
-        },
-        rejected: handleRejected,
+        pending: contactsHandlers.handlePending,
+        fulfilled: contactsHandlers.handleAddContact,
+        rejected: contactsHandlers.handleRejected,
       }
     ),
 
@@ -73,25 +54,20 @@ const contactsSlice = createSlice({
         try {
           return await contactsAPI.deleteContact(id);
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          return rejectWithValue(error.response.data.message);
         }
       },
       {
-        pending: handlePending,
-        fulfilled: (state, { payload }) => {
-          state.contacts.isLoading = false;
-          state.contacts.items = state.contacts.items.filter(
-            c => c.id !== payload.id
-          );
-        },
-        rejected: handleRejected,
+        pending: contactsHandlers.handlePending,
+        fulfilled: contactsHandlers.handleDeleteContact,
+        rejected: contactsHandlers.handleRejected,
       }
     ),
   }),
   selectors: {
-    getContacts: handleContacts,
-    getIsLoading: handleIsLoading,
-    getError: handleError,
+    getContacts: contactsHandlers.handleContacts,
+    getIsLoading: contactsHandlers.handleIsLoading,
+    getError: contactsHandlers.handleError,
   },
 });
 
