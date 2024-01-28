@@ -69,6 +69,27 @@ const authSlice = createSlice({
         rejected: authHandlers.handleRejected,
       }
     ),
+
+    getCurrentUserAction: creator.asyncThunk(
+      async (_, { getState, rejectWithValue }) => {
+        const persistedToken = getState().auth.token;
+        if (!persistedToken) {
+          return rejectWithValue('No token found');
+        }
+        authAPI.token.set(persistedToken);
+        try {
+          const data = await authAPI.currentUser();
+          return data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      },
+      {
+        pending: authHandlers.handlePending,
+        fulfilled: authHandlers.handleGetCurrentUser,
+        rejected: authHandlers.handleRejected,
+      }
+    ),
   }),
   selectors: {
     selectIsLoggedIn: authHandlers.handleIsLoggedIn,
@@ -77,6 +98,12 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { signUpUserAction, logInUserAction, logOutUserAction } =
-  authSlice.actions;
-export const { selectIsLoggedIn, selectUserName } = authSlice.selectors;
+// export const {
+//   signUpUserAction,
+//   logInUserAction,
+//   logOutUserAction,
+//   getCurrentUserAction,
+// } = authSlice.actions;
+export const authActions = authSlice.actions;
+// export const { selectIsLoggedIn, selectUserName } = authSlice.selectors;
+export const authSelectors = authSlice.selectors;

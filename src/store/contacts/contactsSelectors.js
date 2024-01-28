@@ -1,4 +1,4 @@
-export const getFilteredContacts = state => {
+export const selectFilteredContacts = state => {
   const { items } = state.contacts.contacts;
   const { filter } = state.filter;
 

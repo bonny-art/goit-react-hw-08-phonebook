@@ -5,8 +5,6 @@ import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { Notify } from 'notiflix';
 
-import { addContactAction, selectContacts } from 'store';
-
 import {
   InputFormContainer,
   FormField,
@@ -14,15 +12,19 @@ import {
   FormButton,
   ErrorMessageStyled,
 } from './PhoneInputForm.styled';
+import {
+  contactsActions,
+  contactsSelectors,
+} from 'store/contacts/contactsSlice';
 
 const INITIAL_STATE = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 const namePattern =
   "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-const phonePattern =
+const numberPattern =
   /^\+?\d{1,4}[ .-]?\(?\d{1,3}?\)?[ .-]?\d{1,4}[ .-]?\d{1,4}[ .-]?\d{1,9}$/;
 
 const schema = yup.object().shape({
@@ -30,14 +32,14 @@ const schema = yup.object().shape({
     .string()
     .matches(namePattern, 'Name must contain only letters')
     .required('Name is required'),
-  phone: yup
+  number: yup
     .string()
-    .matches(phonePattern, 'Write a valid phone number')
+    .matches(numberPattern, 'Write a valid phone number')
     .required('Phone number is required'),
 });
 
 export const PhoneInputForm = () => {
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(contactsSelectors.selectContacts);
 
   const dispatch = useDispatch();
 
@@ -49,7 +51,7 @@ export const PhoneInputForm = () => {
       return;
     }
 
-    dispatch(addContactAction(data));
+    dispatch(contactsActions.addContactAction(data));
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -78,11 +80,11 @@ export const PhoneInputForm = () => {
           Number:
           <FormInput
             type="tel"
-            name="phone"
+            name="number"
             required
             placeholder="Enter contact's phone number"
           />
-          <ErrorMessage name="phone" component={ErrorMessageStyled} />
+          <ErrorMessage name="number" component={ErrorMessageStyled} />
         </FormField>
         <FormButton type="submit">Add</FormButton>
       </InputFormContainer>

@@ -29,5 +29,11 @@ export const handlelogOutUser = state => {
   state.isLoggedIn = false;
 };
 
+export const handleGetCurrentUser = (state, { payload }) => {
+  state.isLoading = false;
+  state.user = payload;
+  state.isLoggedIn = true;
+};
+
 export const handleIsLoggedIn = state => state.isLoggedIn;
-export const handleUserName = state => state.user.name;
+export const handleUserName = state => state.user?.name;

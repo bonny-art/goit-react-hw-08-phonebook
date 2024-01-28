@@ -2,26 +2,29 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ContactsList } from 'components';
-import { fetchContactsAction } from 'store';
 
 import {
   ContactsListContainer,
   Message,
 } from 'components/ContactsList/ContactsList.styled';
-import { selectIsLoading, selectError } from 'store';
 
 import { Loader } from 'components/Loader/Loader';
-import { getFilteredContacts } from 'store/contacts/contactsSelectors';
+
+import {
+  contactsSelectors,
+  contactsActions,
+} from 'store/contacts/contactsSlice';
+import { selectFilteredContacts } from 'store/contacts/contactsSelectors';
 
 export const Contacts = () => {
-  const contacts = useSelector(getFilteredContacts);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const contacts = useSelector(selectFilteredContacts);
+  const isLoading = useSelector(contactsSelectors.selectIsLoading);
+  const error = useSelector(contactsSelectors.selectError);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContactsAction());
+    dispatch(contactsActions.fetchContactsAction());
   }, [dispatch]);
 
   const sortedContacts = contacts.toSorted((a, b) =>

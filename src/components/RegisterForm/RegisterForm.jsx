@@ -9,7 +9,7 @@ import {
   FormInput,
   InputFormContainer,
 } from 'components/PhoneInputForm/PhoneInputForm.styled';
-import { signUpUserAction } from 'store/auth/authSlice';
+import { authActions } from 'store/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 const INITIAL_STATE = {
@@ -44,7 +44,7 @@ export const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(signUpUserAction(values));
+    dispatch(authActions.signUpUserAction(values));
     resetForm();
   };
 

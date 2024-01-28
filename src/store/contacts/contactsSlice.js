@@ -18,10 +18,14 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: creator => ({
+    logOutUserAction: creator.reducer(contactsHandlers.handleLogOutUser),
+
     fetchContactsAction: creator.asyncThunk(
       async (_, { rejectWithValue }) => {
         try {
-          return await contactsAPI.getContacts();
+          const data = await contactsAPI.getContacts();
+          console.log('get contacts :>> ', data);
+          return data;
         } catch (error) {
           console.log('🚀 ~ error:', error);
           return rejectWithValue(error.response.data.message);
@@ -72,7 +76,6 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export const { fetchContactsAction, addContactAction, deleteContactAction } =
-  contactsSlice.actions;
-export const { selectContacts, selectIsLoading, selectError } =
-  contactsSlice.selectors;
+
+export const contactsActions = contactsSlice.actions;
+export const contactsSelectors = contactsSlice.selectors;

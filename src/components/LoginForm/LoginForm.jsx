@@ -9,7 +9,7 @@ import {
   FormInput,
   InputFormContainer,
 } from 'components/PhoneInputForm/PhoneInputForm.styled';
-import { logInUserAction } from 'store/auth/authSlice';
+import { authActions } from 'store/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 const INITIAL_STATE = {
@@ -31,7 +31,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(logInUserAction(values));
+    dispatch(authActions.logInUserAction(values));
     resetForm();
   };
 
