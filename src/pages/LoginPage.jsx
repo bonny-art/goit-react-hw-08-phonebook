@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { LoginForm } from 'components';
 import { Header } from 'components/Section/Section.styled';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <div>
       <Helmet>
@@ -15,3 +15,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;

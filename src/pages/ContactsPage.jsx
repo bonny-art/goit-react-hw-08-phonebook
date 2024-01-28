@@ -3,7 +3,7 @@ import React from 'react';
 import { PhoneInputForm, Filter, Contacts } from 'components';
 import { Header, Title } from 'components/Section/Section.styled';
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   return (
     <>
       <Header>Phonebook</Header>
@@ -14,3 +14,5 @@ export const ContactsPage = () => {
     </>
   );
 };
+
+export default ContactsPage;

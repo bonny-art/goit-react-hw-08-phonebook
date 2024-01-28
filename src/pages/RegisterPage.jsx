@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { RegisterForm } from 'components';
 import { Header } from 'components/Section/Section.styled';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return (
     <div>
       <Helmet>
@@ -15,3 +15,5 @@ export const RegisterPage = () => {
     </div>
   );
 };
+
+export default RegisterPage;
