@@ -11,3 +11,5 @@ export * from 'components/UserMenu/UserMenu';
 export * from 'components/AuthNav/AuthNav';
 export * from 'components/LoginForm/LoginForm';
 export * from 'components/RegisterForm/RegisterForm';
+export * from 'components/PrivateRoute';
+export * from 'components/RestrictedRoute';

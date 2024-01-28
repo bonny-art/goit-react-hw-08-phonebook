@@ -29,11 +29,25 @@ export const handlelogOutUser = state => {
   state.isLoggedIn = false;
 };
 
+export const handlePendingGetCurrentUser = (state, { payload }) => {
+  state.isLoading = true;
+  state.error = '';
+  state.isRefreshing = true;
+};
+
 export const handleGetCurrentUser = (state, { payload }) => {
   state.isLoading = false;
   state.user = payload;
   state.isLoggedIn = true;
+  state.isRefreshing = false;
+};
+
+export const handleRejectedGetCurrentUser = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+  state.isRefreshing = false;
 };
 
 export const handleIsLoggedIn = state => state.isLoggedIn;
 export const handleUserName = state => state.user?.name;
+export const handleIsRefreshing = state => state.isRefreshing;

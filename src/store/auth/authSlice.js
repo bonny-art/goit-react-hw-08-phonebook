@@ -13,6 +13,7 @@ const initialState = {
   token: '',
   error: '',
   isLoading: false,
+  isRefreshing: false,
 };
 
 const authSlice = createSlice({
@@ -85,25 +86,19 @@ const authSlice = createSlice({
         }
       },
       {
-        pending: authHandlers.handlePending,
+        pending: authHandlers.handlePendingGetCurrentUser,
         fulfilled: authHandlers.handleGetCurrentUser,
-        rejected: authHandlers.handleRejected,
+        rejected: authHandlers.handleRejectedGetCurrentUser,
       }
     ),
   }),
   selectors: {
     selectIsLoggedIn: authHandlers.handleIsLoggedIn,
     selectUserName: authHandlers.handleUserName,
+    selectIsRefreshing: authHandlers.handleIsRefreshing,
   },
 });
 
 export const authReducer = authSlice.reducer;
-// export const {
-//   signUpUserAction,
-//   logInUserAction,
-//   logOutUserAction,
-//   getCurrentUserAction,
-// } = authSlice.actions;
 export const authActions = authSlice.actions;
-// export const { selectIsLoggedIn, selectUserName } = authSlice.selectors;
 export const authSelectors = authSlice.selectors;

@@ -24,10 +24,8 @@ const contactsSlice = createSlice({
       async (_, { rejectWithValue }) => {
         try {
           const data = await contactsAPI.getContacts();
-          console.log('get contacts :>> ', data);
           return data;
         } catch (error) {
-          console.log('🚀 ~ error:', error);
           return rejectWithValue(error.response.data.message);
         }
       },
