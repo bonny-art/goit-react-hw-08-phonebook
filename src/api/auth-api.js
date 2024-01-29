@@ -24,14 +24,14 @@ export const logInUser = async body => {
   return data;
 };
 
-export const logOutUser = async body => {
-  const { data } = await axios.post(connections.USER_LOGOUT_ENDPOINT, body);
+export const logOutUser = async () => {
+  const { data } = await axios.post(connections.USER_LOGOUT_ENDPOINT);
 
   return data;
 };
 
-export const currentUser = async body => {
-  const { data } = await axios.get(connections.USER_CURRENT_ENDPOINT, body);
+export const currentUser = async () => {
+  const { data } = await axios.get(connections.USER_CURRENT_ENDPOINT);
 
   return data;
 };

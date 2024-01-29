@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authActions, authSelectors } from 'store/auth/authSlice';
 
 import { contactsActions } from 'store/contacts/contactsSlice';
+import { DivStyled, LoginStyled, TextStyled } from './UserMenu.styled';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,11 @@ export const UserMenu = () => {
   };
 
   return (
-    <div>
-      <p>Welcome, {user}</p>
-      <button type="button" onClick={() => logOutUser()}>
+    <DivStyled>
+      <TextStyled>Welcome, {user}</TextStyled>
+      <LoginStyled type="button" onClick={logOutUser}>
         Logout
-      </button>
-    </div>
+      </LoginStyled>
+    </DivStyled>
   );
 };

@@ -53,7 +53,7 @@ export const LoginForm = () => {
           <ErrorMessage name="email" component={ErrorMessageStyled} />
         </FormField>
         <FormField>
-          E-mail:
+          Password:
           <FormInput
             type="password"
             name="password"

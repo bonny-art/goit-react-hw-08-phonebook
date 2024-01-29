@@ -1,11 +1,12 @@
+import { DivStyled } from 'components/UserMenu/UserMenu.styled';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { LinkStyled, LoginStyled } from './AuthNav.styled';
 
 export const AuthNav = () => {
   return (
-    <div>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>
-    </div>
+    <DivStyled>
+      <LinkStyled to="/register">Register</LinkStyled>
+      <LoginStyled to="/login">Login</LoginStyled>
+    </DivStyled>
   );
 };

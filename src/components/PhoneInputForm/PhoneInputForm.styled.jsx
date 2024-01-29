@@ -88,6 +88,7 @@ export const FormButton = styled.button`
 
 export const ErrorMessageStyled = styled.button`
   position: absolute;
+  width: ${props => props.theme.spacing(80)};
   top: ${props => props.theme.spacing(2.5)};
   right: ${props => props.theme.spacing(2.5)};
 

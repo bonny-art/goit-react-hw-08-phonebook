@@ -76,7 +76,7 @@ export const RegisterForm = () => {
           <ErrorMessage name="email" component={ErrorMessageStyled} />
         </FormField>
         <FormField>
-          E-mail:
+          Password:
           <FormInput
             type="password"
             name="password"
