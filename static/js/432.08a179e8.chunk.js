@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[432],{8432:function(e,t,r){r.r(t);r(2791);var n=r(4270),c=r(258),s=r(1696),a=r(184);t.default=function(){return(0,a.jsxs)("div",{children:[(0,a.jsx)(n.q,{children:(0,a.jsx)("title",{children:"Registration Page"})}),(0,a.jsx)(s.h4,{children:"Register a new account"}),(0,a.jsx)(c.B2,{})]})}}}]);
+//# sourceMappingURL=432.08a179e8.chunk.js.map
