@@ -35,3 +35,12 @@ export const currentUser = async () => {
 
   return data;
 };
+
+export const updateAvatar = async file => {
+  const { data } = await axios.patch(
+    connections.USER_UPDATE_AVATAR_ENDPOINT,
+    file,
+    { headers: 'Content-Type: multipart/form-data' }
+  );
+  return data;
+};

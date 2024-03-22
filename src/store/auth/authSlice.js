@@ -9,7 +9,11 @@ const createSlice = buildCreateSlice({
 
 const initialState = {
   isLoggedIn: false,
-  user: null,
+  user: {
+    name: '',
+    email: '',
+    avatarUrl: '',
+  },
   token: '',
   error: '',
   isLoading: false,
@@ -91,11 +95,31 @@ const authSlice = createSlice({
         rejected: authHandlers.handleRejectedGetCurrentUser,
       }
     ),
+
+    updateUserAvatar: creator.asyncThunk(
+      async (file, { rejectWithValue }) => {
+        try {
+          const formData = new FormData();
+          formData.append('avatar', file);
+          const data = await authAPI.updateAvatar(formData);
+
+          return data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      },
+      {
+        pending: authHandlers.handlePending,
+        fulfilled: authHandlers.handleUpdateAvatar,
+        rejected: authHandlers.handleRejected,
+      }
+    ),
   }),
   selectors: {
     selectIsLoggedIn: authHandlers.handleIsLoggedIn,
     selectUserName: authHandlers.handleUserName,
     selectIsRefreshing: authHandlers.handleIsRefreshing,
+    selectUser: authHandlers.handleUser,
   },
 });
 

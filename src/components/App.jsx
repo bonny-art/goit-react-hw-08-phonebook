@@ -7,11 +7,14 @@ import { authActions, authSelectors } from 'store/auth/authSlice';
 
 import { Layout, PrivateRoute, RestrictedRoute } from 'components';
 // import { ContactsPage, HomePage, LoginPage, RegisterPage } from 'pages';
+import { ProfilePage } from '../pages/ProfilePage';
+import { UpdateProfilePage } from 'pages/UpdateProfilePage';
 
 const LazyHomePage = lazy(() => import('../pages/HomePage'));
 const LazyRegisterPage = lazy(() => import('../pages/RegisterPage'));
 const LazyLoginPage = lazy(() => import('../pages/LoginPage'));
 const LazyContactsPage = lazy(() => import('../pages/ContactsPage'));
+// const LazyProfilePage = lazy(() => import('../pages/ProfilePage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -55,57 +58,25 @@ export const App = () => {
               />
             }
           />
+
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ProfilePage />} />
+            }
+          />
+
+          <Route
+            path="/profile/update"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<UpdateProfilePage />}
+              />
+            }
+          />
         </Route>
       </Routes>
     )
   );
-
-  // return (
-  //   !isRefreshing && (
-  //     <Routes>
-  //       <Route path="/" element={<Layout />}>
-  //         <Route index element={<HomePage />} />
-  //         <Route
-  //           path="/register"
-  //           element={
-  //             <RestrictedRoute
-  //               redirectTo="/contacts"
-  //               component={<RegisterPage />}
-  //             />
-  //           }
-  //         />
-  //         <Route
-  //           path="/login"
-  //           element={
-  //             <RestrictedRoute
-  //               redirectTo="/contacts"
-  //               component={<LoginPage />}
-  //             />
-  //           }
-  //         />
-
-  //         <Route
-  //           path="/contacts"
-  //           element={
-  //             <PrivateRoute
-  //               redirectTo="/login"
-  //               component={<ContactsPage />}
-  //             />
-  //           }
-  //         />
-  //       </Route>
-  //     </Routes>
-  //   )
-  // );
-
-  // return (
-  //   <Routes>
-  //     <Route path="/" element={<Layout />}>
-  //       <Route index element={<LazyHomePage />} />
-  //       <Route path="/register" element={<LazyRegisterPage />} />
-  //       <Route path="/login" element={<LazyLoginPage />} />
-  //       <Route path="/contacts" element={<LazyContactsPage />} />
-  //     </Route>
-  //   </Routes>
-  // );
 };

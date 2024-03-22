@@ -13,6 +13,7 @@ export const handleSignUpUser = (state, { payload }) => {
   state.user = payload.user;
   state.token = payload.token;
   state.isLoggedIn = true;
+  state.avatarUrl = payload.avatarUrl;
 };
 
 export const handlelogInUser = (state, { payload }) => {
@@ -20,6 +21,7 @@ export const handlelogInUser = (state, { payload }) => {
   state.user = payload.user;
   state.token = payload.token;
   state.isLoggedIn = true;
+  state.avatarUrl = payload.avatarUrl;
 };
 
 export const handlelogOutUser = state => {
@@ -48,6 +50,11 @@ export const handleRejectedGetCurrentUser = (state, { payload }) => {
   state.isRefreshing = false;
 };
 
+export const handleUpdateAvatar = (state, { payload }) => {
+  state.user.avatarUrl = payload.avatarUrl;
+};
+
 export const handleIsLoggedIn = state => state.isLoggedIn;
 export const handleUserName = state => state.user?.name;
 export const handleIsRefreshing = state => state.isRefreshing;
+export const handleUser = state => state.user;

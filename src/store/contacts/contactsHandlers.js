@@ -21,7 +21,9 @@ export const handleAddContact = (state, { payload }) => {
 
 export const handleDeleteContact = (state, { payload }) => {
   state.contacts.isLoading = false;
-  state.contacts.items = state.contacts.items.filter(c => c.id !== payload.id);
+  state.contacts.items = state.contacts.items.filter(
+    c => c._id !== payload._id
+  );
 };
 
 export const handleLogOutUser = state => {

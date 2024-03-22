@@ -5,6 +5,7 @@ import { authActions, authSelectors } from 'store/auth/authSlice';
 
 import { contactsActions } from 'store/contacts/contactsSlice';
 import { DivStyled, LoginStyled, TextStyled } from './UserMenu.styled';
+import { Link } from 'react-router-dom';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const UserMenu = () => {
   return (
     <DivStyled>
       <TextStyled>Welcome, {user}</TextStyled>
+      <Link to="/profile">Profile</Link>
       <LoginStyled type="button" onClick={logOutUser}>
         Logout
       </LoginStyled>

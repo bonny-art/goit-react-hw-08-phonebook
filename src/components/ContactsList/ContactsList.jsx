@@ -5,11 +5,11 @@ import { ContactsListItem } from 'components';
 export const ContactsList = ({ contacts }) => {
   return (
     <>
-      {contacts.map(({ id, name, number }) => {
+      {contacts.map(({ _id, name, number }) => {
         return (
           <ContactsListItem
-            key={id}
-            id={id}
+            key={_id}
+            id={_id}
             name={name}
             number={number}
           ></ContactsListItem>
