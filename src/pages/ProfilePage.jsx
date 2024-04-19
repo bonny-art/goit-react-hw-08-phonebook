@@ -10,7 +10,7 @@ export const ProfilePage = () => {
     <div>
       <h2>{name}</h2>
       <p>{email}</p>
-      //TODO Зробити юрл тернарником в залежності від того, граватар чині
+      {/* Використання тернарного оператора для визначення URL аватара */}
       <img src={avatarUrl} alt="avatar" />
       <Link to="update">Update profile</Link>
     </div>
